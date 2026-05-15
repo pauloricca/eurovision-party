@@ -1,0 +1,12 @@
+services:
+  eurovision-party:
+    build: .
+    container_name: eurovision-party
+    ports:
+      - "3000:3000"
+    environment:
+      - PUBLIC_HOST=${PUBLIC_HOST:-localhost}
+    volumes:
+      - ./data:/app/data
+      - ./countries.txt:/app/countries.txt:ro
+    restart: unless-stopped

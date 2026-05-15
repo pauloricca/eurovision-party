@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Eurovision Party Vote</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Knewave&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="vote-page">
+    <main class="phone-shell">
+      <header class="vote-hero">
+        <h1 class="party-title phone-party-title">Eurovision Party</h1>
+      </header>
+
+      <section id="namePanel" class="panel name-panel">
+        <h2>Your name</h2>
+        <form id="nameForm">
+          <input id="nameInput" maxlength="40" autocomplete="name" placeholder="Enter your name" />
+          <button class="primary" type="submit">Join</button>
+          <p id="nameMessage" class="form-message"></p>
+        </form>
+      </section>
+
+      <section id="votePanel" class="panel vote-panel hidden">
+        <div class="performer">
+          <span id="flag" class="hero-flag">🎤</span>
+          <div>
+            <p id="status" class="eyebrow">Waiting</p>
+            <h2 id="countryName">No country selected</h2>
+            <p id="songInfo" class="muted">The host will open voting soon.</p>
+          </div>
+        </div>
+        <div id="pointsGrid" class="points-grid"></div>
+        <p id="message" class="message"></p>
+      </section>
+
+      <section id="phoneResults" class="panel phone-results hidden">
+        <div class="confetti confetti-back" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="confetti confetti-front" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="sparkles" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="fireworks" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <p class="results-kicker">Tonight's winners</p>
+        <div id="phoneTopThree" class="phone-top-three"></div>
+      </section>
+    </main>
+
+    <script type="module" src="/vote.js"></script>
+  </body>
+</html>

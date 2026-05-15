@@ -1,0 +1,26 @@
+# One country per line. Reorder or replace this file for next year's party.
+Austria
+France
+Germany
+Italy
+United Kingdom
+Denmark
+Israel
+Belgium
+Albania
+Greece
+Ukraine
+Australia
+Serbia
+Malta
+Czechia
+Bulgaria
+Croatia
+Moldova
+Lithuania
+Poland
+Sweden
+Finland
+Norway
+Romania
+Cyprus

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Eurovision Party Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Knewave&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="admin-page">
+    <main class="shell">
+      <section class="topbar">
+        <div>
+          <h1 class="party-title">Eurovision Party</h1>
+          <p class="party-subtitle">Command centre</p>
+        </div>
+        <div class="actions">
+          <button id="closeVoting" class="ghost">Close voting</button>
+          <button id="showResults" class="primary">Show results</button>
+        </div>
+      </section>
+
+      <section class="dashboard">
+        <aside class="panel invite-panel">
+          <h2>Join the vote</h2>
+          <img id="qr" class="qr" src="/api/qr" alt="QR code for voter page" />
+          <p id="voterUrl" class="url"></p>
+          <div class="stat-row">
+            <button id="showVoters" class="stat-tile" type="button"><strong id="voterCount">0</strong><span>voters</span></button>
+            <div><strong id="voteCount">0</strong><span>votes</span></div>
+          </div>
+          <button id="resetParty" class="danger">Reset party</button>
+        </aside>
+
+        <section class="panel now-panel">
+          <div class="current-card" id="currentCard">
+            <span class="big-flag">🎤</span>
+            <div>
+              <p class="eyebrow">Currently voting</p>
+              <h2 id="currentCountry">Pick a country</h2>
+              <p id="currentSong" class="muted">Voting is closed until you choose an act.</p>
+            </div>
+          </div>
+          <div id="countryGrid" class="country-grid"></div>
+        </section>
+      </section>
+
+      <section id="resultsPanel" class="panel results-panel hidden">
+        <div class="confetti confetti-back" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="confetti confetti-front" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="sparkles" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="fireworks" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div id="topThree" class="top-three"></div>
+        <div class="table-wrap">
+          <table id="matrix"></table>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="votersModal" class="modal">
+      <div class="modal-header">
+        <h2>Voters</h2>
+        <button id="closeVoters" class="ghost" type="button">Close</button>
+      </div>
+      <ul id="votersList" class="voters-list"></ul>
+    </dialog>
+
+    <script type="module" src="/admin.js"></script>
+  </body>
+</html>
