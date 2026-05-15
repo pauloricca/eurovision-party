@@ -342,6 +342,44 @@ body.vote-page.idle-mode::before {
   line-height: 1;
 }
 
+.flag-img,
+.big-flag-img,
+.hero-flag-img,
+.winner-flag-img,
+.table-flag-img {
+  display: block;
+  object-fit: cover;
+  box-shadow: 0 8px 22px rgba(23, 21, 31, 0.16);
+}
+
+.flag-img {
+  width: 44px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.big-flag-img,
+.hero-flag-img {
+  width: 92px;
+  height: 64px;
+  border-radius: 8px;
+}
+
+.winner-flag-img {
+  width: 112px;
+  height: 76px;
+  border-radius: 8px;
+}
+
+.table-flag-img {
+  display: inline-block;
+  width: 30px;
+  height: 20px;
+  margin-right: 8px;
+  border-radius: 3px;
+  vertical-align: middle;
+}
+
 .muted {
   color: var(--muted);
 }
@@ -713,8 +751,9 @@ body.results-mode .results-panel {
   background: white;
 }
 
-.top-card .flag {
-  font-size: 4.5rem;
+.top-card .winner-flag-img {
+  width: 130px;
+  height: 88px;
 }
 
 .top-card strong {
@@ -730,8 +769,9 @@ body.results-mode .results-panel {
   transform-origin: center;
 }
 
-.top-card.place-1 .flag {
-  font-size: 6.8rem;
+.top-card.place-1 .winner-flag-img {
+  width: 180px;
+  height: 122px;
 }
 
 .top-card.place-1 strong {
@@ -753,12 +793,14 @@ body.results-mode .top-card.place-1 {
   min-height: 390px;
 }
 
-body.results-mode .top-card .flag {
-  font-size: clamp(5rem, 10vw, 8.5rem);
+body.results-mode .top-card .winner-flag-img {
+  width: clamp(150px, 14vw, 230px);
+  height: clamp(102px, 9.5vw, 156px);
 }
 
-body.results-mode .top-card.place-1 .flag {
-  font-size: clamp(8rem, 15vw, 13rem);
+body.results-mode .top-card.place-1 .winner-flag-img {
+  width: clamp(240px, 22vw, 360px);
+  height: clamp(162px, 14.8vw, 244px);
 }
 
 body.results-mode .top-card strong {
@@ -898,8 +940,9 @@ body.results-mode .confetti {
   grid-column: 1 / -1;
 }
 
-.phone-winner .flag {
-  font-size: 3.6rem;
+.phone-winner .winner-flag-img {
+  width: 92px;
+  height: 62px;
 }
 
 .phone-winner strong {
@@ -913,8 +956,9 @@ body.results-mode .confetti {
   animation: winner-pulse 1.4s ease-in-out infinite;
 }
 
-.phone-winner.place-1 .flag {
-  font-size: 5.5rem;
+.phone-winner.place-1 .winner-flag-img {
+  width: 142px;
+  height: 96px;
 }
 
 .phone-winner.place-1 strong {
@@ -926,9 +970,10 @@ body.results-mode .confetti {
   padding: 10px 6px;
 }
 
-.phone-winner.place-2 .flag,
-.phone-winner.place-3 .flag {
-  font-size: 2.8rem;
+.phone-winner.place-2 .winner-flag-img,
+.phone-winner.place-3 .winner-flag-img {
+  width: 70px;
+  height: 48px;
 }
 
 .phone-winner.place-2 strong,

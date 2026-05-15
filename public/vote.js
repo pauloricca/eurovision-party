@@ -20,6 +20,10 @@ let state = null;
 let selectedVotes = JSON.parse(localStorage.getItem("eurovision-party-selected-votes") || "{}");
 let seenResetAt = localStorage.getItem("eurovision-party-seen-reset-at");
 
+function flagImg(country, className = "flag-img") {
+  return `<img class="${className}" src="https://flagcdn.com/w160/${country.code.toLowerCase()}.png" alt="${country.name} flag" loading="lazy" />`;
+}
+
 function setVisibleHeight() {
   const height = window.visualViewport?.height || window.innerHeight;
   document.documentElement.style.setProperty("--visible-height", `${height}px`);
@@ -109,7 +113,7 @@ function render(nextState) {
     return;
   }
 
-  flag.textContent = country.flag;
+  flag.innerHTML = flagImg(country, "hero-flag-img");
   status.textContent = state.votingOpen ? "Voting now" : "Voting closed";
   countryName.textContent = country.name;
   songInfo.textContent = state.votingOpen ? "Choose a score from 1 to 10." : "The host will open voting soon.";
@@ -160,7 +164,7 @@ function renderResultsMode(state) {
     card.className = `phone-winner place-${index + 1}`;
     card.innerHTML = `
       <span class="rank">${index + 1}</span>
-      <span class="flag">${country.flag}</span>
+      ${flagImg(country, "winner-flag-img")}
       <strong>${country.name}</strong>
       <span>${country.average.toFixed(1)} avg</span>
     `;

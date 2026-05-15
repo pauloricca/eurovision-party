@@ -13,6 +13,10 @@ const votersList = document.querySelector("#votersList");
 
 let appState = null;
 
+function flagImg(country, className = "flag-img") {
+  return `<img class="${className}" src="https://flagcdn.com/w160/${country.code.toLowerCase()}.png" alt="${country.name} flag" loading="lazy" />`;
+}
+
 async function post(url, payload) {
   const response = await fetch(url, {
     method: "POST",
@@ -62,7 +66,7 @@ function renderCurrent(state) {
     return;
   }
 
-  currentCard.querySelector(".big-flag").textContent = country.flag;
+  currentCard.querySelector(".big-flag").innerHTML = flagImg(country, "big-flag-img");
   currentCountry.textContent = country.name;
   const countryResult = state.results.countries.find((row) => row.code === country.code);
   const votes = countryResult?.votes || 0;
@@ -79,7 +83,7 @@ function renderCountries(state) {
     button.className = "country-button";
     if (state.currentCountry?.code === country.code && state.votingOpen) button.classList.add("active");
     button.innerHTML = `
-      <span class="flag">${country.flag}</span>
+      ${flagImg(country)}
       <span>
         <strong>${country.name}</strong>
         <small>${state.results.countries.find((row) => row.code === country.code)?.votes || 0} votes</small>
@@ -100,7 +104,7 @@ function renderResults(state) {
     card.className = `top-card place-${index + 1}`;
     card.innerHTML = `
       <span class="rank">${index + 1}</span>
-      <span class="flag">${country.flag}</span>
+      ${flagImg(country, "winner-flag-img")}
       <strong>${country.name}</strong>
       <span>${country.average.toFixed(1)} avg</span>
       <small>${country.votes} votes, ${country.total} pts</small>
@@ -123,7 +127,7 @@ function renderResults(state) {
     <tbody>
       ${countries.map((country) => `
         <tr>
-          <th>${country.flag} ${country.name}</th>
+          <th>${flagImg(country, "table-flag-img")} ${country.name}</th>
           <td>${country.average.toFixed(1)}</td>
           ${country.byVoter.map((points) => `<td>${points ?? ""}</td>`).join("")}
         </tr>

@@ -158,7 +158,7 @@ async function readBody(request) {
 }
 
 async function serveStatic(response, pathname) {
-  const requested = pathname === "/" ? "/admin.html" : pathname;
+  const requested = pathname === "/" ? "/vote.html" : pathname === "/admin" ? "/admin.html" : pathname === "/vote" ? "/vote.html" : pathname;
   const fullPath = path.normalize(path.join(publicDir, requested));
   if (!fullPath.startsWith(publicDir)) return false;
 
@@ -205,7 +205,7 @@ const server = http.createServer(async (request, response) => {
 
     if (request.method === "GET" && url.pathname === "/api/qr") {
       const host = getLanHost();
-      const voterUrl = `http://${host}:${port}/vote.html`;
+      const voterUrl = `http://${host}:${port}/`;
       const png = await QRCode.toBuffer(voterUrl, { margin: 1, width: 320, color: { dark: "#111111", light: "#ffffff" } });
       response.writeHead(200, { "content-type": "image/png", "cache-control": "no-store" });
       response.end(png);
@@ -215,8 +215,8 @@ const server = http.createServer(async (request, response) => {
     if (request.method === "GET" && url.pathname === "/api/info") {
       const host = getLanHost();
       return sendJson(response, 200, {
-        adminUrl: `http://localhost:${port}/admin.html`,
-        voterUrl: `http://${host}:${port}/vote.html`,
+        adminUrl: `http://localhost:${port}/admin`,
+        voterUrl: `http://${host}:${port}/`,
         host,
         port
       });

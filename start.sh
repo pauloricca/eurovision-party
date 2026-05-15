@@ -19,7 +19,7 @@ fi
 export PUBLIC_HOST
 docker compose up -d --build
 
-URL="http://localhost:3000/admin.html"
+URL="http://localhost:3000/admin"
 
 if command -v open >/dev/null 2>&1; then
   open "$URL"
