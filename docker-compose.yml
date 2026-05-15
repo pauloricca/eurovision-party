@@ -8,5 +8,5 @@ services:
       - PUBLIC_HOST=${PUBLIC_HOST:-localhost}
     volumes:
       - ./data:/app/data
-      - ./countries.txt:/app/countries.txt:ro
+      - ./countries.csv:/app/countries.csv:ro
     restart: unless-stopped

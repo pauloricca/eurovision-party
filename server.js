@@ -9,7 +9,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const publicDir = path.join(__dirname, "public");
 const dataDir = path.join(__dirname, "data");
 const dataFile = path.join(dataDir, "party-state.json");
-const countriesFile = path.join(__dirname, "countries.txt");
+const countriesFile = path.join(__dirname, "countries.csv");
 const port = Number(process.env.PORT || 3000);
 
 const countryMeta = {
@@ -67,10 +67,36 @@ async function loadCountries() {
     .split(/\r?\n/)
     .map((line) => line.trim())
     .filter((line) => line && !line.startsWith("#"))
-    .map((name) => {
+    .filter((line, index) => index !== 0 || !/^country\s*,/i.test(line))
+    .map((line) => {
+      const [name, youtubeVideoId = ""] = parseCsvLine(line);
       const meta = countryMeta[name] || { code: slugCode(name), flag: "🎵" };
-      return { code: meta.code, flag: meta.flag, name };
+      return { code: meta.code, flag: meta.flag, name, youtubeVideoId };
     });
+}
+
+function parseCsvLine(line) {
+  const values = [];
+  let value = "";
+  let quoted = false;
+
+  for (let index = 0; index < line.length; index += 1) {
+    const character = line[index];
+    if (character === '"' && line[index + 1] === '"') {
+      value += '"';
+      index += 1;
+    } else if (character === '"') {
+      quoted = !quoted;
+    } else if (character === "," && !quoted) {
+      values.push(value.trim());
+      value = "";
+    } else {
+      value += character;
+    }
+  }
+
+  values.push(value.trim());
+  return values;
 }
 
 function slugCode(name) {

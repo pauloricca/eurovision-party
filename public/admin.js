@@ -10,6 +10,10 @@ const topThree = document.querySelector("#topThree");
 const matrix = document.querySelector("#matrix");
 const votersModal = document.querySelector("#votersModal");
 const votersList = document.querySelector("#votersList");
+const artistVideoButton = document.querySelector("#artistVideoButton");
+const artistVideoModal = document.querySelector("#artistVideoModal");
+const artistVideoTitle = document.querySelector("#artistVideoTitle");
+const artistVideoFrame = document.querySelector("#artistVideoFrame");
 
 let appState = null;
 
@@ -63,11 +67,15 @@ function renderCurrent(state) {
     currentCard.querySelector(".big-flag").textContent = "🎤";
     currentCountry.textContent = "Pick a country";
     currentSong.textContent = "Voting is closed until you choose an act.";
+    artistVideoButton.classList.add("hidden");
+    artistVideoButton.disabled = true;
     return;
   }
 
   currentCard.querySelector(".big-flag").innerHTML = flagImg(country, "big-flag-img");
   currentCountry.textContent = country.name;
+  artistVideoButton.classList.toggle("hidden", !country.youtubeVideoId);
+  artistVideoButton.disabled = !country.youtubeVideoId;
   const countryResult = state.results.countries.find((row) => row.code === country.code);
   const votes = countryResult?.votes || 0;
   const voters = state.voterCount;
@@ -165,6 +173,26 @@ document.querySelector("#closeVoters").addEventListener("click", () => {
 
 votersModal.addEventListener("click", (event) => {
   if (event.target === votersModal) votersModal.close();
+});
+
+artistVideoButton.addEventListener("click", () => {
+  const country = appState?.currentCountry;
+  if (!country?.youtubeVideoId) return;
+  artistVideoTitle.textContent = `${country.name} artist video`;
+  artistVideoFrame.src = `https://www.youtube.com/embed/${encodeURIComponent(country.youtubeVideoId)}?autoplay=1&start=60`;
+  artistVideoModal.showModal();
+});
+
+document.querySelector("#closeArtistVideo").addEventListener("click", () => {
+  artistVideoModal.close();
+});
+
+artistVideoModal.addEventListener("close", () => {
+  artistVideoFrame.src = "";
+});
+
+artistVideoModal.addEventListener("click", (event) => {
+  if (event.target === artistVideoModal) artistVideoModal.close();
 });
 
 loadInfo();
